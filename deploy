@@ -1,0 +1,13 @@
+if [ -z "$1"]
+then
+  echo "Please provide commit message..."
+else
+  git add .
+  echo "git status before deploy"
+  git status
+  git commit -m $1
+  git push
+  git push heroku
+  echo "git status after deploy"
+  git status
+fi

@@ -1,0 +1,17 @@
+<html>
+  <head>
+    <title>Example tests</title>
+    <link rel="stylesheet" href="nodeunit.css" type="text/css" />
+    <script src="nodeunit.js"></script>
+    <script src="suite1.js"></script>
+    <script src="suite2.js"></script>
+  </head>
+  <body>
+    <script>
+      nodeunit.run({
+        'suite1': suite1,
+        'suite2': suite2
+      });
+    </script>
+  </body>
+</html>

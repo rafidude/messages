@@ -1,0 +1,21 @@
+{ "name": "services"
+, "description": "Messaging Services for IBG"
+, "author": "IBG.com"
+, "version": "0.1.0"
+, "repository":
+  { "type": "git"
+  , "url": "git@github.com:rafidude/messages.git"
+  }
+, "main": "./lib/messaging.js"
+, "dependencies":
+  {
+    "redis": ">=0.6.6"
+  }
+, "devDependencies":
+  { "nodeunit": ">=0.5.0"
+  , "coffee-script": ">=1.1.1"
+  }
+, "engines":
+  { "node": "~0.4"
+  }
+}
