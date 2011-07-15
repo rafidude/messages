@@ -10,10 +10,3 @@ else
 
 client.on "error", (err) ->
   console.log "Error " + err
-
-# returns a object given the unique key
-get = module.exports.get = (key, fn) ->
-  client.get key, (err, obj_str) ->
-    fn err, null if err
-    object = JSON.parse obj_str
-    fn null, object
