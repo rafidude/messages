@@ -45,17 +45,21 @@ refreshChannelsWithSubscribedUsers = ->
     for sub in subscriptions
       addSubscribersToChannels sub
 
-refreshChannelsWithSubscribedUsers()
-
 setInterval ->
-    console.log "Tick #{processInterval/1000} secs.."
-    client.llen "messageQ", (err, count) ->
-      while count > 0
-        processMessageQueue()
-        count -= 1
-  , processInterval
-
-setInterval ->
-    console.log "Tick #{refreshChannelsInterval/1000} secs.."
-    refreshChannelsWithSubscribedUsers()
-  , refreshChannelsInterval
+    console.log "Tick secs.."
+  , 2000
+      
+# refreshChannelsWithSubscribedUsers()
+# 
+# setInterval ->
+#     console.log "Tick #{processInterval/1000} secs.."
+#     client.llen "messageQ", (err, count) ->
+#       while count > 0
+#         processMessageQueue()
+#         count -= 1
+#   , processInterval
+# 
+# setInterval ->
+#     console.log "Tick #{refreshChannelsInterval/1000} secs.."
+#     refreshChannelsWithSubscribedUsers()
+#   , refreshChannelsInterval
