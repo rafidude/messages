@@ -20,7 +20,7 @@ processMessage = (msgKey) ->
   client.hget msgKey, 'channels', (err, channelStr) ->
     console.log err if err
     return if err
-    channels = channelStr.split(',')
+    channels = channelStr.split(',') if channelStr
     for channel in channels
       pushMessageToAllSubscribedUsersOfChannel msgKey, channel
 

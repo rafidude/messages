@@ -15,5 +15,5 @@ setInterval ->
     console.log "Tick 1 secs.."
     client.rpush "messageQ", "M#1"
     client.rpush "messageQ", "M#2"
-    process.exit(0)
+    process.exit(0) 
   , 1000
