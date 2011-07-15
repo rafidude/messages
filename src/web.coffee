@@ -1,16 +1,12 @@
 express = require "express"
 app = express.createServer(express.logger())
 
-messaging = require "./messaging"
-
 count = 0
 
-setInterval ->
-    count += 1
-  , 1000
-    
+messaging = require "./messaging"
+
 app.get "/", (request, response) ->
-  response.send "Hello IBG#{count}!"
+  response.send "Hello IBG! Processed #{count} messages."
 
 port = process.env.PORT or 3000
 app.listen port, ->

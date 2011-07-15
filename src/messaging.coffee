@@ -9,9 +9,11 @@ sendMessageToUserMessageBox = (msgKey, userKey) ->
     console.log err if err
 
 pushMessageToAllSubscribedUsersOfChannel = (msgKey, channel) ->
-  channel.replace /^\s+|\s+$/g, ""
+  channel = channel.replace /^\s+|\s+$/g, ""
   client.smembers channel, (err, subscribed_users) ->
-    # console.log "For channel #{channel} the subscribed users are #{subscribed_users}"
+    console.log err if err
+    return if err
+    console.log "For channel #{channel} the subscribed users are #{subscribed_users}"
     for userKey in subscribed_users
       console.log "Sending message #{msgKey} to user #{userKey}" unless process.env.REDISTOGO_URL
       sendMessageToUserMessageBox msgKey, userKey
@@ -29,13 +31,13 @@ processMessageQueue = ->
     console.log err if err
     return if err
     return unless msgKey
-    # console.log "Processing message: #{msgKey}"
+    console.log "Processing message: #{msgKey}"
     processMessage msgKey
 
 addSubscribersToChannels = (sub) ->
   client.smembers sub, (err, subscribed_channels) ->
     for channel in subscribed_channels
-      # console.log "Adding #{sub.substring(5)} to channel #{channel}"
+      console.log "Adding #{sub.substring(5)} to channel #{channel}"
       client.sadd channel, sub.substring(5)
 
 refreshChannelsWithSubscribedUsers = ->
@@ -45,12 +47,12 @@ refreshChannelsWithSubscribedUsers = ->
     for sub in subscriptions
       addSubscribersToChannels sub
 
-setInterval ->
-    console.log "Tick secs.."
-  , 2000
       
-# refreshChannelsWithSubscribedUsers()
-# 
+refreshChannelsWithSubscribedUsers()
+setInterval ->
+    processMessageQueue()
+  , 1000
+
 # setInterval ->
 #     console.log "Tick #{processInterval/1000} secs.."
 #     client.llen "messageQ", (err, count) ->
