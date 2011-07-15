@@ -1,5 +1,8 @@
-express = require("express")
+express = require "express"
 app = express.createServer(express.logger())
+
+messaging = require "./messaging"
+
 count = 0
 
 setInterval ->
