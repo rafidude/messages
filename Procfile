@@ -1,1 +1,1 @@
-worker: node lib/messaging.js
+web: node lib/web.js
