@@ -13,9 +13,9 @@ pushMessageToAllSubscribedUsersOfChannel = (msgKey, channel) ->
   client.smembers channel, (err, subscribed_users) ->
     console.log err if err
     return if err
-    console.log "For channel #{channel} the subscribed users are #{subscribed_users}"
+    # console.log "For channel #{channel} the subscribed users are #{subscribed_users}"
     for userKey in subscribed_users
-      console.log "Sending message #{msgKey} to user #{userKey}" unless process.env.REDISTOGO_URL
+      # console.log "Sending message #{msgKey} to user #{userKey}" unless process.env.REDISTOGO_URL
       sendMessageToUserMessageBox msgKey, userKey
 
 processMessage = (msgKey) ->
@@ -37,7 +37,7 @@ processMessageQueue = ->
 addSubscribersToChannels = (sub) ->
   client.smembers sub, (err, subscribed_channels) ->
     for channel in subscribed_channels
-      console.log "Adding #{sub.substring(5)} to channel #{channel}"
+      # console.log "Adding #{sub.substring(5)} to channel #{channel}"
       client.sadd channel, sub.substring(5)
 
 refreshChannelsWithSubscribedUsers = ->
